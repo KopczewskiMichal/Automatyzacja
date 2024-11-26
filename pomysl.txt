@@ -1,0 +1,5 @@
+Plik jest wyłącznie tymczasowym zapisaniem założeń miniprojektu aplikacji z pierwszych labów.
+Plik nigdy nie powinien trafić do prowadzącego ze względu na nieformalna formę zapisu. 
+Przeglądający starsze commity (bo tylko w nich ten tekst występuje) proszeni są o zaprzestanie czytania tego pliku.
+
+W sumie na ten moment zamysł aplikacji wydaje się na tyle prosty że nie warto się rozpisywać.
