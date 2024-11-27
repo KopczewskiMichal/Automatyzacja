@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MainController {
+    private final GameRepository gameRepository;
+
+    public MainController(GameRepository gameRepository) {
+        this.gameRepository = gameRepository;
+    }
 
     @PostMapping("/games")
     public ResponseEntity<String> createGame(@RequestBody Game game) {
-        // Tymczasowa logika do sprawdzenia klasy game
         System.out.println(game.toJson());
+        gameRepository.save(game);
         return ResponseEntity.ok("Game created successfully");
     }
 
