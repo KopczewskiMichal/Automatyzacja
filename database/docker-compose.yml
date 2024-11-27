@@ -5,16 +5,16 @@ services:
     image: mysql:latest
     container_name: achievements-app
     ports:
-      - "3306:3306" 
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: achievements-app      
+      MYSQL_DATABASE: achievements-app
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}       
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
-# zapisywanie danych na wolumenie, w pierwszych wersjach testowych wolę zawsze czystą bazę na start
-    # volumes:
-    #   - mysql_data:/var/lib/mysql 
+#zapisywanie danych na wolumenie
+#     volumes:
+#       - mysql_data:/var/lib/mysql
 
 # volumes:
 #   mysql_data:

@@ -1,10 +1,11 @@
-package org.app;
+package org.app.achievements;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.*;
 import lombok.*;
+import org.app.games.Game;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,11 +23,10 @@ public class Achievement implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int achievement_id;
 
-    @Column(nullable = false)
-    private int game_id;
 
-    @Column(nullable = false)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
 
     @Column(nullable = false)
     private String type;
@@ -47,5 +47,3 @@ public class Achievement implements Serializable {
         }
     }
 }
-
-// TODO auto spradzenie czy gameID jest w grach, to ma być klucz obcy

@@ -1,4 +1,4 @@
-package org.app;
+package org.app.games;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package org.app;
+package org.app.games;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @ToString(includeFieldNames = true)
 @Builder
