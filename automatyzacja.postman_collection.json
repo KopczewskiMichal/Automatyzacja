@@ -1,0 +1,171 @@
+{
+	"info": {
+		"_postman_id": "3c6c5ea6-b8c5-46ab-b69c-91bc788374ca",
+		"name": "automatyzacja",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31033105"
+	},
+	"item": [
+		{
+			"name": "POST game",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"tittle\": \"The Great Adventure\",\n  \"releaseDate\": \"2024-12-01T00:00:00\",\n  \"category\": \"Action\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/games",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST achievement",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"game_id\": 1,\n    \"achievement_id\": 1,\n    \"type\": \"Zabicie Stefana\",\n    \"description\": \"Gracz zabił przeciwnika o imieniu Stefan\",\n    \"achievement_date\": \"2024-12-01T00: 00: 00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/games/1/achievements",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games",
+						"1",
+						"achievements"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/games",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET game achievements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/games/1/achievements",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games",
+						"1",
+						"achievements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE achievement",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/games/1/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update game",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tittle\": \"The Great Adventure\",\n    \"releaseDate\": \"16-06-0007\",\n    \"category\": \"Comedy\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/games/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Game Achievements",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/games/1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"games",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
