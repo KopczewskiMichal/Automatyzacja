@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString(includeFieldNames = true)
 @Builder
 @Entity

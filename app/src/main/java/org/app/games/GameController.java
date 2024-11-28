@@ -1,5 +1,6 @@
 package org.app.games;
 
+import jakarta.transaction.Transactional;
 import org.app.achievements.AchievementsRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,19 @@ public class GameController {
     public ResponseEntity<String> deleteGame(@PathVariable int id) {
         gameRepository.deleteById(id);
         return ResponseEntity.ok("Game deleted successfully");
+    }
+
+    @PutMapping("/games/{id}")
+    @Transactional
+    public ResponseEntity<Game> updateGame(@PathVariable int id, @RequestBody Game updatedGame) {
+        return gameRepository.findById(id)
+               .map(game -> {
+                    game.setTittle(updatedGame.getTittle());
+                    game.setReleaseDate(updatedGame.getReleaseDate());
+                    game.setCategory(updatedGame.getCategory());
+                    return ResponseEntity.ok(gameRepository.save(game));
+                })
+               .orElse(ResponseEntity.notFound().build());
     }
 
 }
