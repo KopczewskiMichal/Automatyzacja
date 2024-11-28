@@ -2,10 +2,7 @@ package org.app.games;
 
 import org.app.achievements.AchievementsRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,19 @@ public class GameController {
     public ResponseEntity<List<Game>> getAllGames() {
         List<Game> games = gameRepository.findAll();
         return ResponseEntity.ok(games);
+    }
+
+    @GetMapping("/games/{id}")
+    public ResponseEntity<Game> getGameById(@PathVariable int id) {
+        return gameRepository.findById(id)
+               .map(ResponseEntity::ok)
+               .orElse(ResponseEntity.notFound().build());
+    }
+
+    @DeleteMapping("/games/{id}")
+    public ResponseEntity<String> deleteGame(@PathVariable int id) {
+        gameRepository.deleteById(id);
+        return ResponseEntity.ok("Game deleted successfully");
     }
 
 }
