@@ -63,4 +63,25 @@ public class AchievementController {
         return ResponseEntity.ok("Achievement deleted successfully");
     }
 
+    @PutMapping("/games/{id}/achievements/{achievement_id}")
+    public ResponseEntity<?> updateAchievement(@PathVariable("id") int game_id, @PathVariable("achievement_id") int achievement_id, @RequestBody Achievement updatedAchievement) {
+        Optional<Game> gameOptional = gameRepository.findById(game_id);
+        if (gameOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Game not found");
+        }
+        Game game = gameOptional.get();
+        Optional<Achievement> achievementOptional = achievementsRepository.findById(achievement_id);
+        if (achievementOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Achievement not found");
+        }
+        Achievement achievement = achievementOptional.get();
+        if (!achievement.getGame().equals(game)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Achievement does not belong to the given game");
+        }
+        achievement.setType(updatedAchievement.getType());
+        achievement.setDescription(updatedAchievement.getDescription());
+        achievement.setAchievement_date(updatedAchievement.getAchievement_date());
+        return ResponseEntity.ok(achievementsRepository.save(achievement));
+    }
+
 }
