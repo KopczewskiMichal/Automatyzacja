@@ -20,6 +20,7 @@ import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -95,6 +96,40 @@ class GameControllerTest {
 
         verify(gameRepository, times(1)).findById(1);
     }
+
+    @Test
+    void testUpdateGame() throws Exception {
+        Game existingGame = new Game();
+        existingGame.setId(1);
+        existingGame.setTitle("GTA");
+        existingGame.setReleaseDate(java.sql.Date.valueOf("2022-05-15"));
+        existingGame.setCategory("Action");
+
+        when(gameRepository.findById(1)).thenReturn(Optional.of(existingGame));
+
+        Game updatedGame = new Game();
+        updatedGame.setId(1);
+        updatedGame.setTitle("GTA 2");
+        updatedGame.setReleaseDate(java.sql.Date.valueOf("2023-05-15"));
+        updatedGame.setCategory("Action");
+
+        when(gameRepository.save(any(Game.class))).thenReturn(updatedGame);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String updatedGameJson = objectMapper.writeValueAsString(updatedGame);
+
+        mockMvc.perform(put("/games/{id}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedGameJson))
+                .andExpect(status().isOk()) // Sprawdzenie, czy status to 200 OK
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.title").value("GTA 2"))
+                .andExpect(jsonPath("$.releaseDate").value("2023-05-15"))
+                .andExpect(jsonPath("$.category").value("Action")); 
+
+        verify(gameRepository, times(1)).save(any(Game.class));
+    }
+
 
     @Test
     void testCreateGame() throws Exception {
