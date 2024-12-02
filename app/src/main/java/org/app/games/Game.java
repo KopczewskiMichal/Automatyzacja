@@ -24,7 +24,7 @@ public class Game implements Serializable {
     private int id;
 
     @Column(nullable = false)
-    private String tittle;
+    private String title;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.DATE)

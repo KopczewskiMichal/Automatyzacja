@@ -46,7 +46,7 @@ public class GameController {
     public ResponseEntity<Game> updateGame(@PathVariable int id, @RequestBody Game updatedGame) {
         return gameRepository.findById(id)
                .map(game -> {
-                    game.setTittle(updatedGame.getTittle());
+                    game.setTitle(updatedGame.getTitle());
                     game.setReleaseDate(updatedGame.getReleaseDate());
                     game.setCategory(updatedGame.getCategory());
                     return ResponseEntity.ok(gameRepository.save(game));
