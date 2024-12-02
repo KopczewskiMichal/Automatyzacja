@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.Mockito.*;
@@ -53,5 +54,15 @@ class GameControllerTest {
                 .andExpect(status().isOk());
 
         verify(gameRepository, times(1)).save(any(Game.class));
+    }
+
+    @Test
+    void testDeleteGame() throws Exception {
+        int id = 1;
+
+        doNothing().when(gameRepository).deleteById(id);
+        mockMvc.perform(delete("/games/{id}", id))
+                .andExpect(status().isOk());
+        verify(gameRepository, times(1)).deleteById(id);
     }
 }

@@ -17,7 +17,6 @@ public class GameController {
 
     @PostMapping("/games")
     public ResponseEntity<String> createGame(@RequestBody Game game) {
-        System.out.println(game.toJson());
         gameRepository.save(game);
         return ResponseEntity.ok("Game created successfully");
     }
