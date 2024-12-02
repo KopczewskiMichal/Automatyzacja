@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -75,23 +76,25 @@ class GameControllerTest {
         verify(gameRepository, times(1)).findAll();
     }
 
-//    @Test
-//    void testGetGameById() throws Exception {
-//        Game game = new Game();
-//        game.setId(1);
-//        game.setTitle("GTA");
-//        game.setReleaseDate(java.sql.Date.valueOf("2022-05-15"));
-//        game.setCategory("Action");
-//
-//        when(gameRepository.findById(1)).thenReturn(Optional.of(game));
-//
-//        mockMvc.perform(get("/games/{id}", 1))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(1))
-//                .andExpect(jsonPath("$.title").value("GTA"))
-//                .andExpect(jsonPath("$.releaseDate").value("2022-05-15"))
-//                .andExpect(jsonPath("$.category").value("Action"));
-//    }
+    @Test
+    void testGetGameById() throws Exception {
+        Game game = new Game();
+        game.setId(1);
+        game.setTitle("GTA");
+        game.setReleaseDate(java.sql.Date.valueOf("2022-05-15"));
+        game.setCategory("Action");
+
+        when(gameRepository.findById(1)).thenReturn(Optional.of(game));
+
+        mockMvc.perform(get("/games/{id}", 1))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(1))
+                .andExpect(jsonPath("$.title").value("GTA"))
+                .andExpect(jsonPath("$.releaseDate").value("2022-05-15"))
+                .andExpect(jsonPath("$.category").value("Action"));
+
+        verify(gameRepository, times(1)).findById(1);
+    }
 
     @Test
     void testCreateGame() throws Exception {
