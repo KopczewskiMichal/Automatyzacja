@@ -26,7 +26,8 @@ public class Game implements Serializable {
     @Column(nullable = false)
     private String title;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date releaseDate;
 
@@ -42,12 +43,4 @@ public class Game implements Serializable {
             throw new RuntimeException("Error during serialization", e);
         }
     }
-
-//    public static Game fromJson(String json) {
-//        try {
-//            return objectMapper.readValue(json, Game.class);
-//        } catch (JsonProcessingException e) {
-//            throw new RuntimeException("Error during deserialization", e);
-//        }
-//    }
 }
