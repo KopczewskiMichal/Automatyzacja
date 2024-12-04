@@ -19,10 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
@@ -118,6 +116,37 @@ public class AchievementsControllerTest {
         mockMvc.perform(delete("/games/1/1"))
                 .andExpect(status().isOk());
         verify(achievementsRepository, times(1)).delete(achievement);
+    }
+
+    @Test
+    void testUpdateAchievement() throws Exception {
+        Game game = new Game();
+        game.setId(1);
+
+        Achievement achievement = new Achievement();
+        achievement.setAchievement_id(1);
+        achievement.setGame(game);
+        achievement.setAchievement_date(java.sql.Date.valueOf("2022-05-15"));
+        achievement.setDescription("Gracz zabił smoka");
+
+        when(gameRepository.findById(game.getId())).thenReturn(Optional.of(game));
+        when(achievementsRepository.findById(achievement.getAchievement_id())).thenReturn(Optional.of(achievement));
+
+        achievement.setAchievement_id(achievement.getAchievement_id());
+        achievement.setGame(game);
+        achievement.setAchievement_date(java.sql.Date.valueOf("2022-05-16"));
+        achievement.setDescription("Gracz wygrał kartę");
+
+        when(achievementsRepository.save(achievement)).thenReturn(achievement);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String achievementJson = objectMapper.writeValueAsString(achievement);
+
+        mockMvc.perform(put("/games/1/achievements/1")
+                       .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                       .content(achievementJson))
+                .andExpect(status().isOk());
+        verify(achievementsRepository, times(1)).save(achievement);
     }
 
 }
