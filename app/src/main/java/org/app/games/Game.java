@@ -18,6 +18,37 @@ import java.util.Date;
 @Entity
 @Table(name = "games")
 public class Game implements Serializable {
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

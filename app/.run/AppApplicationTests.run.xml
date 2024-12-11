@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="AppApplicationTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+  <configuration default="false" name="AppApplicationTests" type="JUnit" factoryName="JUnit">
     <module name="app" />
     <extension name="coverage">
       <pattern>

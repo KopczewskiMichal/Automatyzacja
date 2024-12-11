@@ -19,6 +19,45 @@ import java.util.Date;
 @Entity
 @Table(name = "achievements")
 public class Achievement implements Serializable {
+    public int getAchievement_id() {
+        return achievement_id;
+    }
+
+    public void setAchievement_id(int achievement_id) {
+        this.achievement_id = achievement_id;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getAchievement_date() {
+        return achievement_date;
+    }
+
+    public void setAchievement_date(Date achievement_date) {
+        this.achievement_date = achievement_date;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
