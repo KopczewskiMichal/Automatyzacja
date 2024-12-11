@@ -11,4 +11,6 @@ FROM eclipse-temurin:23-alpine AS final
 WORKDIR /opt/app
 EXPOSE 8080
 COPY --from=builder /opt/app/target/*.jar /opt/app/app.jar
+COPY src/main/resources/.env /opt/app/.env
 ENTRYPOINT ["java", "-jar", "/opt/app/app.jar"]
+# ENTRYPOINT ["tail", "-f", "/dev/null"]

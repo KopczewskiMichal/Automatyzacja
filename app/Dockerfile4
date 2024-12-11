@@ -1,0 +1,26 @@
+# Etap budowania
+FROM eclipse-temurin:23-alpine AS builder
+WORKDIR /opt/app
+
+# Skopiuj narzędzia Mavena i plik pom.xml
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+
+# Pobierz zależności
+RUN ./mvnw dependency:go-offline
+
+# Skopiuj kod źródłowy
+COPY ./src ./src
+
+# Zbuduj projekt i uruchom testy
+RUN ./mvnw clean test
+
+# Etap końcowy
+FROM eclipse-temurin:23-alpine AS final
+WORKDIR /opt/app
+
+# Skopiuj wyniki testów (opcjonalnie, do analizy logów)
+COPY --from=builder /opt/app/target/surefire-reports /opt/app/test-reports
+
+# Ustaw domyślne działanie (wyświetlanie wyników testów, opcjonalnie)
+CMD ["cat", "/opt/app/test-reports/*.txt"]

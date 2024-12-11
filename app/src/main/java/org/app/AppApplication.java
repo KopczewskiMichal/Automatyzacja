@@ -11,7 +11,9 @@ public class AppApplication {
     Dotenv dotenv = Dotenv.configure().load();
     System.setProperty("MYSQL_USER", dotenv.get("MYSQL_USER"));
     System.setProperty("MYSQL_PASSWORD", dotenv.get("MYSQL_PASSWORD"));
-        SpringApplication.run(AppApplication.class, args);
+        System.setProperty("MYSQL_URL", dotenv.get("MYSQL_URL"));
+    SpringApplication.run(AppApplication.class, args);
+
     }
 
 }
