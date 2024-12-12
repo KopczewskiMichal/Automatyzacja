@@ -8,8 +8,6 @@ services:
       - "8080:8080"
     networks:
       - auto_network
-    volumes:
-      - mysql_data:/var/lib/mysql
     
   
   mysql:
@@ -29,6 +27,8 @@ services:
     networks:
       auto_network:
         ipv4_address: 172.28.0.5
+    volumes:
+      - mysql_data:/var/lib/mysql
 
 networks:
   auto_network:
