@@ -2,14 +2,11 @@ FROM eclipse-temurin:23-alpine AS builder
 WORKDIR /opt/app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvnw dependency:go-offline
-COPY ./src ./src
-RUN ./mvnw clean install
+COPY src src/
+RUN ./mvnw clean install -DskipTests
 
-# Etap końcowy
 FROM eclipse-temurin:23-alpine AS final
 WORKDIR /opt/app
 EXPOSE 8080
 COPY --from=builder /opt/app/target/*.jar /opt/app/app.jar
-COPY src/main/resources/.env /opt/app/.env
 ENTRYPOINT ["java", "-jar", "/opt/app/app.jar"]
