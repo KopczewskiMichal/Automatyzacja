@@ -6,19 +6,12 @@ spec:
   containers:
     - name: mysql-client
       image: mysql:8
-      command: ["sh", "-c", "until mysql -h $MYSQL_HOST -P 3306 -u $MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE; do echo 'Waiting for MySQL...'; sleep 3; done; echo 'Connected to MySQL!'"]
+      command: ["sh", "-c", "until mysql -h $MYSQL_HOST -P 3306 -u root -p${MYSQL_ROOT_PASSWORD} -e 'SELECT 1'; do echo 'Waiting for MySQL...'; sleep 3; done; echo 'Connected to MySQL!'"]
       env:
         - name: MYSQL_HOST
           value: "mysql"
-        - name: MYSQL_USER
+        - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: app-secret
-              key: MYSQL_USER
-        - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: app-config
-              key: MYSQL_PASSWORD
-        - name: MYSQL_DATABASE
-          value: "automatyzacja-db"
+              key: MYSQL_ROOT_PASSWORD
