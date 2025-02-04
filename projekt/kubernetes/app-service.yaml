@@ -7,6 +7,6 @@ spec:
     app: app
   ports:
     - protocol: TCP
-      port: 80           # port zewnętrzny
+      port: 80           # port na zewnątrz klastra
       targetPort: 8080    # port kontenera
   type: LoadBalancer

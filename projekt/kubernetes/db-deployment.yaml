@@ -7,37 +7,25 @@ spec:
   selector:
     matchLabels:
       app: mysql
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: mysql
     spec:
       containers:
-        - name: mysql
-          image: mysql:8
+        - image: mysql:8
+          name: mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: automatyzacja-secret
-                  key: MYSQL_ROOT_PASSWORD
-            - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: automatyzacja-secret
-                  key: MYSQL_USER
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: automatyzacja-secret
+                  name: app-secret
                   key: MYSQL_PASSWORD
-            - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config
-                  key: MYSQL_DATABASE
           ports:
             - containerPort: 3306
+              name: mysql
           volumeMounts:
             - name: mysql-persistent-storage
               mountPath: /var/lib/mysql
