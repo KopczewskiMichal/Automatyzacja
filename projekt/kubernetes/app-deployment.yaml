@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: app
+      app: app-automatyzacja
   template:
     metadata:
       labels:
-        app: app
+        app: app-automatyzacja
     spec:
       containers:
         - name: app
@@ -21,24 +21,21 @@ spec:
           ports:
             - containerPort: 8080
           env:
+            - name: MYSQL_PASSWORD # celowa niezgodność nazw, tak mam w application.properties
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_URL
               valueFrom:
                 configMapKeyRef:
                   name: app-config
                   key: MYSQL_URL
             - name: MYSQL_USER
-              valueFrom:
-                secretKeyRef:
-                  name: automatyzacja-secret
-                  key: MYSQL_USER
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: automatyzacja-secret
-                  key: MYSQL_PASSWORD
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 10
+              value: "root"
+#          readinessProbe:
+#            httpGet:
+#              path: /actuator/health
+#              port: 8080
+#            initialDelaySeconds: 5
+#            periodSeconds: 10
