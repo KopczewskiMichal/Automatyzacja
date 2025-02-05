@@ -10,3 +10,4 @@ spec:
       port: 3306
       targetPort: 3306
   clusterIP: 10.100.200.10
+

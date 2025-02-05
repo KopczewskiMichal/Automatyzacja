@@ -4,9 +4,12 @@ metadata:
   name: app-service
 spec:
   selector:
-    app: app-deployment
+    app: app-automatyzacja
   ports:
     - protocol: TCP
-      port: 80           # port na zewnątrz klastra
-      targetPort: 8080    # port kontenera
-  type: LoadBalancer
+      port: 80
+      targetPort: 8080
+      nodePort: 30080 # Aplikacja działa na tym porcie
+  type: NodePort
+  externalTrafficPolicy: Local
+

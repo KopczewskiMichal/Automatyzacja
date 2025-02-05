@@ -33,9 +33,18 @@ spec:
                   key: MYSQL_URL
             - name: MYSQL_USER
               value: "root"
-#          readinessProbe:
-#            httpGet:
-#              path: /actuator/health
-#              port: 8080
-#            initialDelaySeconds: 5
-#            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /games   # Endpoint zdrowia (musisz mieć endpoint typu /health w aplikacji)
+              port: 8080
+            initialDelaySeconds: 5   # Opóźnienie na początku
+            periodSeconds: 5         # Częstotliwość sprawdzania
+            failureThreshold: 3      # Liczba nieudanych prób, aby uznać kontener za martwy
+          readinessProbe:
+            httpGet:
+              path: /games   # Endpoint zdrowia (też /health)
+              port: 8080
+            initialDelaySeconds: 5   # Opóźnienie na początku
+            periodSeconds: 5         # Częstotliwość sprawdzania
+            failureThreshold: 3      # Liczba nieudanych prób, aby uznać kontener za niedostępny
+
