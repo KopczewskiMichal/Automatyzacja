@@ -1,3 +1,4 @@
+# Plik niepotrzebny odkąd dodano kubernetesa
 services:
   spring:
     build: './app'
