@@ -3,7 +3,7 @@ WORKDIR /opt/app
 COPY .mvn .mvn
 COPY mvnw pom.xml ./
 COPY src src/
-RUN ./mvnw clean install -DskipTests
+RUN ./mvnw clean install
 
 FROM eclipse-temurin:23-alpine AS final
 WORKDIR /opt/app
