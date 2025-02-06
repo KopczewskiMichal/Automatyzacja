@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="AppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
-    <module name="app" />
+    <module name="automatyzacja" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="org.app.AppApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
