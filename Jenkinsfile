@@ -1,8 +1,9 @@
 pipeline {
-    agent {
-     docker {
-                image 'maven:3.8.6'
-            }}
+    agent any
+
+    tools {
+        maven 'M3'
+    }
 
     stages {
         stage('Build') {
