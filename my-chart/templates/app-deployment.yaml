@@ -5,7 +5,7 @@ metadata:
   labels:
     app: app-automatyzacja
 spec:
-  replicas: 1
+  replicas: "{{ .Values.app.replicas}} "
   selector:
     matchLabels:
       app: app-automatyzacja
@@ -16,20 +16,20 @@ spec:
     spec:
       containers:
         - name: app
-          image: mkopczewski/automatyzacja:latest
-          imagePullPolicy: Always
+          image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag }}"
+          imagePullPolicy: "{{ .Values.app.image.pullPolicy }}"
           ports:
             - containerPort: 8080
           env:
             - name: MYSQL_PASSWORD # celowa niezgodność nazw, tak mam w application.properties
               valueFrom:
                 secretKeyRef:
-                  name: app-secret
+                  name: "{{ .Values.secretName}}"
                   key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_URL
               valueFrom:
                 configMapKeyRef:
-                  name: app-config
+                  name: "{{ .Values.configmapName}}"
                   key: MYSQL_URL
             - name: MYSQL_USER
               value: "root"
