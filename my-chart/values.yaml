@@ -13,6 +13,14 @@ database:
     pullPolicy: IfNotPresent
   replicas: 1
 
+ingress:
+  enabled: true
+  host: "localhost"
+  path: "/"
+  service:
+    name: "app-service"
+    port: 80
+
 
 secretName: app-secret
 configmapName: app-config
